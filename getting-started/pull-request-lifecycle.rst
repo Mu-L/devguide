@@ -3,7 +3,7 @@
 .. _pullrequest:
 
 ===========================
-Lifecycle of a Pull Request
+Lifecycle of a pull request
 ===========================
 
 .. highlight:: bash
@@ -19,7 +19,7 @@ the official CPython repository (``upstream``).
 
 .. _pullrequest-quickguide:
 
-Quick Guide
+Quick guide
 ===========
 
 `Clear communication`_ is key to contributing to any project, especially an
@@ -32,7 +32,7 @@ Here is a quick overview of how you can contribute to CPython:
 #. :ref:`Create a new branch in Git <pullrequest-steps>` from the
    ``main`` branch
 
-#. Work on changes (e.g. fix a bug or add a new feature)
+#. Work on changes: fix a bug or add a new feature
 
 #. :ref:`Run tests <runtests>` and ``make patchcheck``
 
@@ -41,8 +41,8 @@ Here is a quick overview of how you can contribute to CPython:
 
 #. `Create Pull Request`_ on GitHub to merge a branch from your fork
 
-#. Make sure the continuous integration checks on your Pull Request
-   are green (i.e. successful)
+#. Make sure the :ref:`continuous integration checks on your Pull Request
+   are green <keeping-ci-green>` (successful)
 
 #. Review and address `comments on your Pull Request`_
 
@@ -51,7 +51,7 @@ Here is a quick overview of how you can contribute to CPython:
 
 #. Celebrate contributing to CPython! :)
 
-.. [*] If an issue is trivial (e.g. typo fixes), or if an issue already exists,
+.. [*] If an issue is trivial (for example, typo fixes), or if an issue already exists,
        you can skip this step.
 
 .. note::
@@ -70,7 +70,7 @@ Here is a quick overview of how you can contribute to CPython:
 
 .. _pullrequest-steps:
 
-Step-by-step Guide
+Step-by-step guide
 ==================
 
 You should have already :ref:`set up your system <setup>`,
@@ -108,7 +108,12 @@ You should have already :ref:`set up your system <setup>`,
 
   (Learn more about :ref:`good-commits`)
 
-* Then push your work to your GitHub fork::
+* If your code isn't linted correctly, :ref:`pre-commit <install-pre-commit>`
+  will block the commit with an error message, for example::
+
+     Doc/library/stdtypes.rst:5718: No newline at end of file. (missing-final-newline)
+
+* Once all linting errors have been fixed, you can push your work to your GitHub fork::
 
      git push origin <branch-name>
 
@@ -132,7 +137,7 @@ You should have already :ref:`set up your system <setup>`,
      git pull origin <branch-name>  # pull = fetch + merge
 
     If you have made local changes that have not been pushed to your fork and
-    there are merge conflicts, git will warn you about this and enter conflict
+    there are merge conflicts, Git will warn you about this and enter conflict
     resolution mode. See :ref:`resolving-merge-conflicts` below.
 
 * If time passes and there are merge conflicts with the main branch, GitHub
@@ -152,7 +157,7 @@ You should have already :ref:`set up your system <setup>`,
 
 .. _resolving-merge-conflicts:
 
-Resolving Merge Conflicts
+Resolving merge conflicts
 -------------------------
 
 When merging changes from different branches (or variants of a branch on
@@ -165,14 +170,14 @@ resolved as follows:
       git status
 
 #. Edit the affected files and bring them to their intended final state.
-   Make sure to remove the special "conflict markers" inserted by git.
+   Make sure to remove the special "conflict markers" inserted by Git.
 
 #. Commit the affected files::
 
       git add <filenames>
       git merge --continue
 
-When running the final command, git may open an editor for writing a commit
+When running the final command, Git may open an editor for writing a commit
 message. It is usually okay to leave that as-is and close the editor.
 
 See `the merge command's documentation <https://git-scm.com/docs/git-merge>`_
@@ -181,7 +186,7 @@ for a detailed technical explanation.
 
 .. _good-prs:
 
-Making Good PRs
+Making good PRs
 ===============
 
 When creating a pull request for submission, there are several things that you
@@ -233,25 +238,44 @@ should do to help ensure that your pull request is accepted.
 #. Proper :ref:`documentation <documenting>` additions/changes should be included.
 
 
+Copyrights
+==========
+
+Copyright notices are optional and informational, as international treaties
+have abolished the requirement for them to protect copyrights.
+However, they still serve an informative role.
+
+According to the US Copyright Office, valid copyright notices include the year
+of first publication of the work. For example:
+
+   Copyright (C) 2001 Python Software Foundation.
+
+Updating notices to add subsequent years is unnecessary and such PRs will be
+closed.
+
+See also `python/cpython#126133
+<https://github.com/python/cpython/issues/126133#issuecomment-2460824052>`__.
+
+
 .. _patchcheck:
 
 ``patchcheck``
 ==============
 
-``patchcheck`` is a simple automated patch checklist that guides a developer
-through the common patch generation checks. To run ``patchcheck``:
+``patchcheck`` is a simple automated checklist for changes in progress that
+guides a developer through common checks. To run ``patchcheck``:
 
-   On *UNIX* (including macOS)::
+On *Unix* (including macOS)::
 
-      make patchcheck
+   make patchcheck
 
-   On *Windows* (after any successful build):
+On *Windows* (after any successful build):
 
-   .. code-block:: dosbatch
+.. code-block:: dosbatch
 
-      python.bat Tools\patchcheck\patchcheck.py
+   .\python.bat Tools\patchcheck\patchcheck.py
 
-The automated patch checklist runs through:
+The automated checklist runs through:
 
 * Are there any whitespace problems in Python files?
   (using :cpy-file:`Tools/patchcheck/reindent.py`)
@@ -261,20 +285,20 @@ The automated patch checklist runs through:
 * Has the test suite been updated?
 * Has an entry under ``Misc/NEWS.d/next`` been added?
   (using `blurb-it <https://blurb-it.herokuapp.com/>`_,
-  or the `blurb <https://pypi.org/project/blurb/>`_ tool)
+  or the :pypi:`blurb` tool)
 * Has ``Misc/ACKS`` been updated?
 * Has ``configure`` been regenerated, if necessary?
 * Has ``pyconfig.h.in`` been regenerated, if necessary?
 
-The automated patch check doesn't actually *answer* all of these
+The automated checks don't actually *answer* all of these
 questions. Aside from the whitespace checks, the tool is
 a memory aid for the various elements that can go into
-making a complete patch.
+making a complete pull request.
 
 
 .. _good-commits:
 
-Making Good Commits
+Making good commits
 ===================
 
 Each feature or bugfix should be addressed by a single pull request,
@@ -303,7 +327,7 @@ to explain in proper depth what has happened (detail should be good enough
 that a core developer reading the commit message understands the
 justification for the change).
 
-Check :ref:`the git bootcamp <accepting-and-merging-a-pr>` for further
+Check :ref:`the Git bootcamp <accepting-and-merging-a-pr>` for further
 instructions on how the commit message should look like when merging a pull
 request.
 
@@ -353,7 +377,7 @@ changes to your branch. In general you can run ``git commit -a`` and
 that will commit everything. You can always run ``git status`` to see
 what changes are outstanding.
 
-When all of your changes are committed (i.e. ``git status`` doesn't
+When all of your changes are committed (that is, ``git status`` doesn't
 list anything), you will want to push your branch to your fork::
 
   git push origin <branch name>
@@ -374,7 +398,7 @@ relevant detail as possible to prevent reviewers from having to delay
 reviewing your pull request because of lack of information.
 
 If this issue is so simple that there's no need for an issue to track
-any discussion of what the pull request is trying to solve (e.g. fixing a
+any discussion of what the pull request is trying to solve (for example, fixing a
 spelling mistake), then the pull request needs to have the "skip issue" label
 added to it by someone with commit access.
 
@@ -386,7 +410,7 @@ another so they can easily verify whether their comments have been addressed.
 The commits will be squashed when the pull request is merged.
 
 
-Converting an Existing Patch from b.p.o to GitHub
+Converting an existing patch from b.p.o to GitHub
 =================================================
 
 When a patch exists in the `issue tracker`_ that should be converted into a
@@ -414,9 +438,9 @@ your pull request. Getting your pull request reviewed requires a
 reviewer to have the spare time and motivation to look at your pull
 request (we cannot force anyone to review pull requests and no one is
 employed to look at pull requests). If your pull request has not
-received any notice from reviewers (i.e., no comment made) after one
+received any notice from reviewers (that is, no comment made) after one
 month, first "ping" the issue on the `issue tracker`_ to remind the
-nosy list that the pull request needs a review.
+subscribers that the pull request needs a review.
 If you don't get a response within a week after pinging the issue,
 you can post on the `Core Development Discourse category`_
 to ask for someone to review your pull request.
@@ -430,7 +454,7 @@ thus iterate until a satisfactory solution has emerged.
 
 .. _how-to-review-a-pull-request:
 
-How to Review a Pull Request
+How to review a pull request
 ----------------------------
 
 One of the bottlenecks in the Python development
@@ -471,8 +495,8 @@ code and leave comments in the pull request or issue tracker.
    However, please be aware that if you are recommending a pull request as
    'merge-ready', you should always make sure the entire test suite passes.
 
-Leaving a Pull Request Review on GitHub
-=======================================
+Leaving a pull request review on GitHub
+---------------------------------------
 
 When you review a pull request, you should provide additional details and context
 of your review process.
@@ -487,16 +511,73 @@ Instead of simply "approving" the pull request, leave comments.  For example:
 #. Comment on what is "good" about the pull request, not just the "bad". Doing
    so will make it easier for the PR author to find the good in your comments.
 
-Dismissing Review from Another Core Developer
-=============================================
+#. Look at any failures in CI on the current PR. See :ref:`"Keeping CI green"
+   <keeping-ci-green>` below for simple things you can do to help move the PR forward.
+
+Dismissing review from another core developer
+---------------------------------------------
 
 A core developer can dismiss another core developer's review if they confirmed
 that the requested changes have been made.  When a core developer has assigned
 the PR to themselves, then it is a sign that they are actively looking after
 the PR, and their review should not be dismissed.
 
+.. _keeping-ci-green:
 
-Committing/Rejecting
+Keeping continuous integration green
+====================================
+
+Our change management workflows generally won't allow merging PRs with
+failures. Therefore, if you see a CI failure on a PR, have a look
+what it is about.
+
+Usually the failure will be directly related to the changes in the current
+PR. If you happen to have any insight into the failure, let the author know
+in a review comment. CI runs sometimes generate thousands of lines of output.
+Even something as simple as finding the traceback and putting it in the
+comment will be helpful to the PR author.
+
+If the failure doesn't look related to the change you're looking at, check
+if it's not present on the `Release Status`_ Buildbot dashboard as well.
+If so, that means the failure was introduced in a prior change. Using Buildbot's
+UI you can find which PR introduced the issue and comment that it
+affects other PRs.
+
+If you still don't see where the failure originates from, check for
+a "This branch is out-of-date with the base branch" sign next to the
+list of executed checks. Clicking "Update branch" next to this message
+will merge in the latest changes from the base branch into the PR.
+
+If this still doesn't help with the failure on the PR, you can try
+to re-run that particular failed check. Go to the red GitHub Action job,
+click on the :guilabel:`Re-run jobs` button on the top right, and select
+:guilabel:`Re-run failed jobs`. The button will only be present when all other
+jobs finished running.
+
+Re-running failed jobs shouldn't be your first instinct but it is occasionally
+helpful because distributed systems can have intermittent failures, and
+some of our unit tests are sensitive to overloaded virtual machines.
+If you identify such flaky behavior, look for an issue in the `issue tracker`_
+that describes this particular flakiness. Create a new issue if you can't
+find one.
+
+:guilabel:`Update branch` button
+================================
+
+You can click on the :guilabel:`Update branch` button to merge the latest
+changes from the base branch (usually ``main``) into the PR.
+This is useful to :ref:`keep the CI green <keeping-ci-green>` for old PRs,
+or to check if a CI failure has been fixed in the base branch.
+
+If the PR is very old, it may be useful to update the branch before merging to
+ensure that the PR does not fail any CI checks that were added or changed since
+CI last ran.
+
+Do not click :guilabel:`Update branch` without a good reason because it notifies
+everyone watching the PR that there are new changes, when there are not,
+and it uses up limited CI resources.
+
+Committing/rejecting
 ====================
 
 Once your pull request has reached an acceptable state (and thus considered
@@ -507,7 +588,7 @@ Python is tricky and we simply cannot accept everyone's contributions.
 
 But if your pull request is merged it will then go into Python's
 :abbr:`VCS (version control system)` to be released
-with the next major release of Python. It may also be backported to older
+with the next feature release of Python. It may also be backported to older
 versions of Python as a bugfix if the core developer doing the merge believes
 it is warranted.
 
@@ -522,3 +603,4 @@ accepts your pull request.
 
 .. _issue tracker: https://github.com/python/cpython/issues
 .. _Core Development Discourse category: https://discuss.python.org/c/core-dev/23
+.. _Release Status: https://buildbot.python.org/all/#/release_status

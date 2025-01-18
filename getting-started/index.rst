@@ -1,5 +1,7 @@
+.. _getting-started:
+
 ===============
-Getting Started
+Getting started
 ===============
 
 .. toctree::
@@ -10,3 +12,4 @@ Getting Started
    git-boot-camp
    pull-request-lifecycle
    getting-help
+   generative-ai

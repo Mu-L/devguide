@@ -58,7 +58,7 @@ When in doubt, new internal C functions should be defined in
 ``Include/internal`` using the ``extern`` keyword.
 
 Private names
---------------
+-------------
 
 Any API named with a leading underscore is also considered internal.
 There is currently only one main use case for using such names rather than
@@ -74,7 +74,7 @@ the :ref:`unstable-capi`:
 * APIs for very specialized uses like JIT compilers.
 
 
-Internal API Tests
+Internal API tests
 ------------------
 
 C tests for the internal C API live in ``Modules/_testinternalcapi.c``.
@@ -93,7 +93,10 @@ CPython's public C API is available when ``Python.h`` is included normally
 It should be defined in ``Include/cpython/`` (unless part of the Limited API,
 see below).
 
-Guidelines for expanding/changing the public API:
+.. _public-api-guidelines:
+
+Guidelines for expanding/changing the public API
+------------------------------------------------
 
 - Make sure the new API follows reference counting conventions.
   (Following them makes the API easier to reason about, and easier use
@@ -106,8 +109,26 @@ Guidelines for expanding/changing the public API:
 - Make sure the ownership rules and lifetimes of all applicable struct
   fields, arguments and return values are well defined.
 
+- Functions returning ``PyObject *`` must return a valid pointer on success,
+  and ``NULL`` with an exception raised on error.
+  Most other API must return ``-1`` with an exception raised on error,
+  and ``0`` on success.
 
-C API Tests
+- APIs with lesser and greater results must return ``0`` for the lesser result,
+  and ``1`` for the greater result.
+  Consider a lookup function with a three-way return:
+
+  - ``return -1``: internal error or API misuse; exception raised
+  - ``return 0``: lookup succeeded; no item was found
+  - ``return 1``: lookup succeeded; item was found
+
+Please start a public discussion if these guidelines won't work for your API.
+
+.. note::
+
+   By *return value*, we mean the value returned by the *C return statement*.
+
+C API tests
 -----------
 
 Tests for the public C API live in the ``_testcapi`` module.
@@ -153,7 +174,7 @@ Unstable C API
 
 The unstable C API tier is meant for extensions that need tight integration
 with the interpreter, like debuggers and JIT compilers.
-Users of this tier may need to change their code with every minor release.
+Users of this tier may need to change their code with every feature release.
 
 In many ways, this tier is like the general C API:
 
@@ -168,7 +189,7 @@ The differences are:
 
 - Names of functions structs, macros, etc. start with the ``PyUnstable_``
   prefix. This defines what's in the unstable tier.
-- The unstable API can change in minor versions, without any deprecation
+- The unstable API can change in feature releases, without any deprecation
   period.
 - A stability note appears in the docs.
   This happens automatically, based on the name
@@ -177,7 +198,7 @@ The differences are:
 Despite being “unstable”, there are rules to make sure third-party code can
 use this API reliably:
 
-* Changes and removals can be done in minor releases
+* Changes and removals can be done in feature releases
   (:samp:`3.{x}.0`, including Alphas and Betas for :samp:`3.{x}.0`).
 * Adding a new unstable API *for an existing feature* is allowed even after
   Beta feature freeze, up until the first Release Candidate.
@@ -196,7 +217,9 @@ Moving an API from the public tier to Unstable
 ----------------------------------------------
 
 * Expose the API under its new name, with the ``PyUnstable_`` prefix.
-* Make the old name an alias (e.g. a ``static inline`` function calling the
+  The ``PyUnstable_`` prefix must be used for all symbols (functions, macros,
+  variables, etc.).
+* Make the old name an alias (for example, a ``static inline`` function calling the
   new function).
 * Deprecate the old name, typically using :c:macro:`Py_DEPRECATED`.
 * Announce the change in the "What's New".
@@ -232,7 +255,7 @@ Moving an API from unstable to public
 -------------------------------------
 
 * Expose the API under its new name, without the ``PyUnstable_`` prefix.
-* Make the old ``PyUnstable_*`` name be an alias (e.g. a ``static inline``
+* Make the old ``PyUnstable_*`` name be an alias (for example, a ``static inline``
   function calling the new function).
 * Announce the change in What's New.
 
@@ -292,10 +315,13 @@ It is possible to remove items marked as part of the Stable ABI, but only
 if there was no way to use them in any past version of the Limited API.
 
 
+.. _limited-api-guidelines:
+
 Guidelines for adding to the Limited API
 ----------------------------------------
 
 - Guidelines for the general :ref:`public-capi` apply.
+  See :ref:`public-api-guidelines`.
 
 - New Limited API should only be defined if ``Py_LIMITED_API`` is set
   to the version the API was added in or higher.
@@ -367,7 +393,7 @@ Adding a new definition to the Limited API
 
     #if !defined(Py_LIMITED_API) || Py_LIMITED_API+0 >= 0x03yy0000
 
-  with the ``yy`` corresponding to the target CPython version, e.g.
+  with the ``yy`` corresponding to the target CPython version, for example,
   ``0x030A0000`` for Python 3.10.
 - Append an entry to the Stable ABI manifest, ``Misc/stable_abi.toml``
 - Regenerate the autogenerated files using ``make regen-limited-abi``.
@@ -375,19 +401,19 @@ Adding a new definition to the Limited API
 
   .. code-block:: shell
 
-     ./python ./Tools/scripts/stable_abi.py --generate-all ./Misc/stable_abi.toml
+     ./python ./Tools/build/stable_abi.py --generate-all ./Misc/stable_abi.toml
 
 - Build Python and check the using ``make check-limited-abi``.
   On platforms without ``make``, run this command directly:
 
   .. code-block:: shell
 
-    ./python ./Tools/scripts/stable_abi.py --all ./Misc/stable_abi.toml
+    ./python ./Tools/build/stable_abi.py --all ./Misc/stable_abi.toml
 
 - Add tests -- see below.
 
 
-Limited API Tests
+Limited API tests
 -----------------
 
 Since Limited API is a subset of the C API, there's no need to test the
@@ -400,7 +426,7 @@ To add a test file:
 
 - Add a C file ``Modules/_testcapi/yourfeature_limited.c``. If that file
   already exists but its ``Py_LIMITED_API`` version is too low, add a version
-  postfix, e.g. ``yourfeature_limited_3_12.c`` for Python 3.12+.
+  postfix, for example, ``yourfeature_limited_3_12.c`` for Python 3.12+.
 - ``#define Py_LIMITED_API`` to the minimum limited API version needed.
 - ``#include "parts.h"`` after the ``Py_LIMITED_API`` definition
 - Enclose the entire rest of the file in ``#ifdef LIMITED_API_AVAILABLE``,

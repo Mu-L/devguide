@@ -1,5 +1,7 @@
+.. _dev-workflow:
+
 ====================
-Development Workflow
+Development workflow
 ====================
 
 .. toctree::
@@ -13,3 +15,5 @@ Development Workflow
    lang-changes
    grammar
    porting
+   sbom
+   psrt

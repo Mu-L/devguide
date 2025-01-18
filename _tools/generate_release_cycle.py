@@ -1,4 +1,5 @@
 """Read in a JSON and generate two CSVs and an SVG file."""
+
 from __future__ import annotations
 
 import argparse
@@ -44,7 +45,7 @@ class Versions:
 
     def write_csv(self) -> None:
         """Output CSV files."""
-        now_str = str(dt.datetime.now(dt.UTC))
+        now_str = str(dt.datetime.now(dt.timezone.utc))
 
         versions_by_category = {"branches": {}, "end-of-life": {}}
         headers = None

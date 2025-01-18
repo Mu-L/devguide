@@ -2,11 +2,11 @@
 .. _tracker:
 
 =============
-Issue Tracker
+Issue tracker
 =============
 
 
-Using the Issue Tracker
+Using the issue tracker
 =======================
 
 If you think you have found a bug in Python, you can report it to the
@@ -17,9 +17,10 @@ If you would like to file an issue about this devguide, please do so at the
 `devguide repo`_.
 
 .. note::
+    Prior to moving the issue tracker to GitHub,
     Python used to use a dedicated `Roundup`_ instance as its issue tracker.
-    That old bug tracker was hosted under the domain ``bugs.python.org``
-    (sometimes called ``bpo`` for short). Currently a read-only version is still
+    That `old bug tracker`_ was hosted under the domain ``bugs.python.org``
+    (sometimes called ``bpo`` for short). A read-only version is
     available on that domain for historical purposes. All ``bpo`` data has been
     migrated to the current `issue tracker`_ on GitHub.
 
@@ -49,23 +50,17 @@ Reporting an issue
 ------------------
 
 If the problem you're reporting is not already in the `issue tracker`_, you
-can report it using the green "New issue" button on the right of the search
+can report it using the green :guilabel:`New issue` button on the right of the search
 box above the list of bugs. If you're not already signed in to GitHub, it
 will ask you to do so now.
 
 First you need to select what kind of problem you want to report. The
-available choices are:
+available choices include, for example:
 
-* **Bug report**: an existing feature isn't working as expected;
-* **Documentation**: there is missing, invalid, or misleading documentation;
-* **Enhancement**: suggest a new feature for Python;
-* **Performance**: something should work faster;
-* **Security**: there is a specific kind of weakness open to exploitation
-  through the points of vulnerability;
-* **Tests**: something is wrong with CPython's suite of regression tests;
-* **Discuss**: you'd like to learn more about Python, discuss ideas for
-  possible changes to future Python versions, track core development
-  discussions, or join a specific special-interest group.
+ * **Bug report**: an existing feature isn't working as expected.
+ * **Documentation**: there is missing, invalid, or misleading documentation.
+ * **Feature or enhancement**: suggest a new feature for Python.
+ * **Report a security vulnerability**: privately report a security vulnerability.
 
 Depending on your choice, a dedicated form template will appear.
 In particular, you'll notice that the last button actually takes you to
@@ -124,7 +119,7 @@ By writing :samp:`Duplicate of #{NNN}` in a comment, you can
 `mark issues and PRs as duplicates <duplicates_>`_.
 
 
-Disagreement With a Resolution on the Issue Tracker
+Disagreement with a resolution on the issue tracker
 ===================================================
 
 As humans, we will have differences of opinions from time to time. First and
@@ -154,9 +149,10 @@ reason either as ``complete`` or ``not planned``.
 .. _issue tracker: https://github.com/python/cpython/issues
 .. _advanced search: https://github.com/search/advanced
 .. _devguide repo: https://github.com/python/devguide/issues
-.. _Roundup: https://roundup.sourceforge.io/
+.. _Roundup: https://www.roundup-tracker.org/
 .. _Python Discourse: https://discuss.python.org/
 .. _autolinks: https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/autolinked-references-and-urls
 .. _checklists: https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/about-task-lists
-.. _duplicates: https://docs.github.com/en/issues/tracking-your-work-with-issues/marking-issues-or-pull-requests-as-a-duplicate
+.. _duplicates: https://docs.github.com/en/issues/tracking-your-work-with-issues/administering-issues/marking-issues-or-pull-requests-as-a-duplicate
 .. _Core Development Discourse category: https://discuss.python.org/c/core-dev/23
+.. _old bug tracker: https://bugs.python.org/

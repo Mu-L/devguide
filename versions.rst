@@ -2,21 +2,23 @@
 .. _branchstatus:
 
 =========================
-Status of Python Versions
+Status of Python versions
 =========================
 
-The main branch is currently the future Python 3.12, and is the only
+The ``main`` branch is currently the future Python 3.14, and is the only
 branch that accepts new features.  The latest release for each Python
 version can be found on the `download page <https://www.python.org/downloads/>`_.
 
 
-Python Release Cycle
+Python release cycle
 ====================
 
 .. raw:: html
    :file: include/release-cycle.svg
 
-Supported Versions
+Another useful visualization is `endoflife.date/python <https://endoflife.date/python>`_.
+
+Supported versions
 ==================
 
 Dates shown in *italic* are scheduled and can be adjusted.
@@ -29,7 +31,7 @@ Dates shown in *italic* are scheduled and can be adjusted.
 .. Remember to update main branch in the paragraph above too
 
 
-Unsupported Versions
+Unsupported versions
 ====================
 
 .. csv-table::
@@ -38,7 +40,7 @@ Unsupported Versions
    :file: include/end-of-life.csv
 
 
-Status Key
+Status key
 ==========
 
 :feature: new features, bugfixes, and security fixes are accepted.
@@ -50,7 +52,7 @@ Status Key
     but new source-only versions can be released
 :end-of-life: release cycle is frozen; no further changes can be pushed to it.
 
-See also the :ref:`devcycle` page for more information about branches.
+See also the :ref:`devcycle` page for more information about branches and backporting.
 
 By default, the end-of-life is scheduled 5 years after the first release,
 but can be adjusted by the release manager of each branch.  All Python 2

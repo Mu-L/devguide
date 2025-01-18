@@ -1,7 +1,7 @@
 .. _lang-changes:
 .. _langchanges:
 
-Changing the Python Language
+Changing the Python language
 ============================
 On occasion people come up with an idea on how to change or improve Python as a
 programming language. This document is meant to explain exactly what changes
@@ -9,7 +9,7 @@ have a reasonable chance of being considered and what the process is to propose
 changes to the language.
 
 
-What Qualifies
+What qualifies
 --------------
 First and foremost, it must be understood that changes to the Python
 programming language are difficult to make. When the language changes,
@@ -45,7 +45,7 @@ The `Ideas Discourse category`_
 is specifically intended for discussion of new features and language changes.
 Please don't be disappointed if your idea isn't met with universal approval:
 as the :pep:`long list of Withdrawn and Rejected PEPs
-<0#abandoned-withdrawn-and-rejected-peps>`
+<0#rejected-superseded-and-withdrawn-peps>`
 in the :pep:`PEP Index <0>` attests,
 and as befits a reasonably mature programming language,
 getting significant changes into Python isn't a simple task.
@@ -66,7 +66,7 @@ see `Justifying Python Language Changes`_.
 
 .. _lang-changes-pep-process:
 
-PEP Process
+PEP process
 -----------
 
 Once you are certain you have a language change proposal
@@ -86,4 +86,3 @@ to inform others who may propose a similar language change in the future.
 .. _Ideas Discourse category: https://discuss.python.org/c/ideas/6
 .. _Status Quo Wins a Stalemate: https://www.curiousefficiency.org/posts/2011/02/status-quo-wins-stalemate.html
 .. _Justifying Python Language Changes: https://www.curiousefficiency.org/posts/2011/02/justifying-python-language-changes.html
-

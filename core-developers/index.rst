@@ -1,5 +1,7 @@
+.. _core-dev:
+
 ===============
-Core Developers
+Core developers
 ===============
 
 .. toctree::

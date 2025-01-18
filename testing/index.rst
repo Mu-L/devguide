@@ -1,5 +1,7 @@
+.. _testing:
+
 =====================
-Testing and Buildbots
+Testing and buildbots
 =====================
 
 .. toctree::
